@@ -206,45 +206,126 @@
     field.dispatchEvent(new Event('change', { bubbles: true }));
   }));
 
-  const album = [
-    ['project-living-room.webp', 'Interiors, down to the details.', 'Living room with white built-in shelves, a fireplace, and wood floors'],
-    ['pergola.webp', 'A little more room outdoors.', 'Timber pergola over a patio beside a brick home'],
-    ['project-hallway.webp', 'A different perspective on the everyday.', 'Entry room with an arched transom window and dark wood flooring'],
-    ['project-dining-room.webp', 'A place to gather.', 'Dining room with a chandelier, pale walls, and white trim'],
-    ['project-bedroom.webp', 'Room to settle in.', 'Bedroom with a ceiling fan, pale walls, and carpet'],
-    ['project-garage.webp', 'Useful spaces deserve attention, too.', 'Garage with pale walls and a gray floor'],
-    ['project-sunroom.webp', 'The view from inside.', 'Sunroom with a timber ceiling, skylights, and large windows'],
-    ['deck.webp', 'Life on the other side of the back door.', 'Wood deck with horizontal railings beside a house'],
-    ['fence.webp', 'A little privacy.', 'Wood privacy fence and gate bordering a backyard'],
-    ['door.webp', 'The welcome home.', 'White glass-paneled double entry doors beneath a porch lantern'],
-    ['stairs.webp', 'The way to the backyard.', 'Outdoor steps and wood railings'],
-    ['shelving.webp', 'Making better use of the space.', 'White shelving along the walls of a storage space'],
-    ['gate.webp', 'The everyday details.', 'Wood side gate with black hinges and a latch'],
-    ['deck2.webp', 'Another view from the deck.', 'Wooden backyard deck and railings'],
-    ['fence-detail.webp', 'Following the landscape.', 'Wood fence around a yard with mature trees'],
-    ['project-2020.webp', 'The carpet care that started it all.', 'Carpet-cleaning extraction equipment inside a home'],
-    ['project-deck.webp', 'Outdoor work in progress.', 'Deck boards beneath an outdoor roof, with exposed framing at the edge'],
-    ['dr-mac-at-work.webp', 'The name behind the work.', 'Dr. Mac with the service van, work trailer, ladders, and cleaning equipment']
-  ];
+  const album = window.DrMacGallery;
+  const categories = {all: 'All work', interiors: 'Interiors & finishes', outdoor: 'Decks & outdoors', repairs: 'Repairs & details', flooring: 'Floors & carpet'};
+  const allPhotos = () => album.map((_, index) => index);
   const gallery = $('#gallery-dialog');
+  const grid = $('#project-grid');
+  const morePhotos = $('#gallery-more');
+  const galleryStatus = $('#gallery-status');
+  const batchSize = 12;
+  let selectedFilter = 'all';
+  let visiblePhotos = 0;
+  let filteredPhotos = allPhotos();
+  let activePhotos = allPhotos();
+  let activeFilter = 'all';
   let albumIndex = 0;
+  let galleryRequest = 0;
+
   function showPhoto(index) {
-    albumIndex = (index + album.length) % album.length;
-    const [filename, caption, alt] = album[albumIndex];
-    $('#gallery-image').src = `images/${filename}`;
-    $('#gallery-image').alt = alt;
-    $('#gallery-caption').textContent = caption;
-    gallery.dataset.position = String(albumIndex);
+    albumIndex = (index + activePhotos.length) % activePhotos.length;
+    const actualIndex = activePhotos[albumIndex];
+    const photo = album[actualIndex];
+    const image = $('#gallery-image');
+    const request = ++galleryRequest;
+    image.src = photo.src;
+    image.alt = photo.alt;
+    $('#gallery-title').textContent = `DR. MAC PROJECT FILES / ${categories[photo.category].toUpperCase()}`;
+    $('#gallery-caption').textContent = photo.caption + (photo.inProgress ? ' Work in progress.' : '');
+    gallery.dataset.position = String(actualIndex);
+    gallery.dataset.filter = activeFilter;
+    image.decode().catch(() => {
+      if (request === galleryRequest && gallery.open) $('#gallery-caption').textContent = 'This photograph could not load. Try the next photo.';
+    });
   }
-  function openPhoto(index) { showPhoto(index); gallery.showModal(); syncFilm(); }
+  function openPhoto(actualIndex, selection = allPhotos()) {
+    activePhotos = selection;
+    activeFilter = selection === filteredPhotos ? selectedFilter : 'all';
+    showPhoto(Math.max(0, activePhotos.indexOf(actualIndex)));
+    gallery.showModal();
+    syncFilm();
+  }
+  function renderPhotos(reset = false) {
+    if (reset) { grid.replaceChildren(); visiblePhotos = 0; }
+    const next = filteredPhotos.slice(visiblePhotos, visiblePhotos + batchSize);
+    const fragment = document.createDocumentFragment();
+    next.forEach(index => {
+      const photo = album[index];
+      const figure = document.createElement('figure');
+      figure.className = 'project-print';
+      figure.dataset.category = photo.category;
+      const link = document.createElement('a');
+      link.className = 'project-print-link';
+      link.href = photo.src;
+      link.dataset.galleryPhoto = String(index);
+      link.setAttribute('aria-label', `Enlarge: ${photo.alt}`);
+      link.setAttribute('aria-haspopup', 'dialog');
+      link.setAttribute('aria-controls', 'gallery-dialog');
+      const image = document.createElement('img');
+      image.src = photo.thumbnail;
+      image.alt = photo.alt;
+      image.width = photo.width;
+      image.height = photo.height;
+      image.loading = 'lazy';
+      image.decoding = 'async';
+      const corner = document.createElement('span');
+      corner.className = 'print-enlarge';
+      corner.setAttribute('aria-hidden', 'true');
+      corner.textContent = '↗';
+      link.append(image, corner);
+      const caption = document.createElement('figcaption');
+      const label = document.createElement('span');
+      label.textContent = categories[photo.category] + (photo.inProgress ? ' / In progress' : '');
+      const description = document.createElement('span');
+      description.textContent = photo.caption;
+      caption.append(label, description);
+      figure.append(link, caption);
+      fragment.append(figure);
+    });
+    grid.append(fragment);
+    visiblePhotos += next.length;
+    morePhotos.hidden = visiblePhotos >= filteredPhotos.length;
+    galleryStatus.textContent = `${categories[selectedFilter]}. ${morePhotos.hidden ? 'All photographs in this selection are shown.' : 'More photographs below.'}`;
+  }
+  $$('.gallery-filters button').forEach(button => button.addEventListener('click', () => {
+    selectedFilter = button.dataset.filter;
+    filteredPhotos = allPhotos().filter(index => selectedFilter === 'all' || album[index].category === selectedFilter);
+    $$('.gallery-filters button').forEach(filter => filter.setAttribute('aria-pressed', String(filter === button)));
+    renderPhotos(true);
+  }));
+  morePhotos.addEventListener('click', () => {
+    const firstNew = visiblePhotos;
+    renderPhotos();
+    const link = grid.children[firstNew]?.querySelector('a');
+    if (link) link.focus({preventScroll: true});
+  });
+  grid.addEventListener('click', event => {
+    const link = event.target.closest('[data-gallery-photo]');
+    if (!link) return;
+    event.preventDefault();
+    openPhoto(Number(link.dataset.galleryPhoto), filteredPhotos);
+  });
+  renderPhotos(true);
   $$('[data-photo]').forEach(link => link.addEventListener('click', event => { event.preventDefault(); openPhoto(Number(link.dataset.photo)); }));
-  $('#open-album').addEventListener('click', () => openPhoto(0));
+  $('#open-album').addEventListener('click', () => openPhoto(filteredPhotos[0], filteredPhotos));
   $('#gallery-prev').addEventListener('click', () => showPhoto(albumIndex - 1));
   $('#gallery-next').addEventListener('click', () => showPhoto(albumIndex + 1));
   gallery.addEventListener('keydown', event => {
     if (event.key === 'ArrowLeft') { event.preventDefault(); showPhoto(albumIndex - 1); }
     if (event.key === 'ArrowRight') { event.preventDefault(); showPhoto(albumIndex + 1); }
   });
+  let touchStart = null;
+  $('#gallery-image').addEventListener('touchstart', event => {
+    touchStart = event.touches.length === 1 ? {x: event.touches[0].clientX, y: event.touches[0].clientY} : null;
+  }, {passive: true});
+  $('#gallery-image').addEventListener('touchend', event => {
+    if (!touchStart || event.changedTouches.length !== 1) return;
+    const dx = event.changedTouches[0].clientX - touchStart.x;
+    const dy = event.changedTouches[0].clientY - touchStart.y;
+    if (Math.abs(dx) > 55 && Math.abs(dx) > Math.abs(dy) * 1.5) showPhoto(albumIndex + (dx < 0 ? 1 : -1));
+    touchStart = null;
+  }, {passive: true});
+  $('#gallery-image').addEventListener('touchcancel', () => { touchStart = null; }, {passive: true});
   const menu = $('#mobile-menu');
   const menuToggle = $('.menu-toggle');
   menuToggle.addEventListener('click', () => { menu.showModal(); menuToggle.setAttribute('aria-expanded', 'true'); syncFilm(); });

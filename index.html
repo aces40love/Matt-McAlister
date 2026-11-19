@@ -20,6 +20,7 @@
   <link rel="preload" href="fonts/manrope-semibold.ttf" as="font" type="font/ttf" crossorigin>
   <link rel="preload" href="images/commercial-poster.webp" as="image">
   <link rel="stylesheet" href="styles.css">
+  <script src="gallery-data.js" defer></script>
   <script src="app.js" defer></script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"HomeAndConstructionBusiness","name":"Dr. Mac Home Services","telephone":"+1-901-754-2215","email":"dr.mac@att.net","address":{"@type":"PostalAddress","addressLocality":"Cordova","addressRegion":"TN","addressCountry":"US"},"areaServed":{"@type":"Place","name":"Cordova, Tennessee"},"description":"Home improvements and repairs, decks, fences, painting, drywall, flooring, and carpet and upholstery care."}</script>
   <noscript><style>.js-only,.film-opening,.skip-opening,.motion-toggle,.gallery-launch,.menu-toggle{display:none!important}.service-panel[hidden]{display:block!important}.service-toggle{pointer-events:none}.service-sign{display:none}.reveal{opacity:1!important;transform:none!important;clip-path:none!important}.photo-link{display:block}.project-form-wrap{display:none}.desktop-nav{display:flex!important;flex-wrap:wrap}.site-header{height:auto;min-height:88px;flex-wrap:wrap;padding-block:15px}html{scroll-behavior:auto}</style></noscript>
@@ -37,9 +38,9 @@
   </defs></svg>
 
   <header class="site-header" id="top">
-    <a class="brand" href="#top" aria-label="Dr. Mac Home Services home"><img class="brand-icon" src="images/house-doctor-emblem.webp" alt="Dr. Mac roof, hammer, and stethoscope emblem" width="879" height="690"><span class="brand-wordmark">DR. <b>MAC</b><span>HOME SERVICES</span></span></a>
+    <a class="brand" href="#top" aria-label="Dr. Mac Home Services home"><img class="brand-icon" src="images/house-doctor-emblem.webp" alt="Dr. Mac roof, hammer, and stethoscope emblem" width="879" height="690"><span class="brand-wordmark"><img src="images/house-doctor-wordmark.webp" alt="Dr. Mac Home Services. Repair, remodel, restore." width="560" height="223"></span></a>
     <span class="header-location">CORDOVA<br>TENNESSEE</span>
-    <nav class="desktop-nav" aria-label="Main navigation"><a href="#work">Our work</a><a href="#services">Services</a><a href="#story">Our story</a><a href="#contact">Contact</a></nav>
+    <nav class="desktop-nav" aria-label="Main navigation"><a href="#work">Gallery</a><a href="#services">Services</a><a href="#story">Our story</a><a href="#contact">Contact</a></nav>
     <a class="header-phone" href="tel:+19017542215" aria-label="Call Dr. Mac at 901.754.2215"><span class="phone-full">901.754.2215</span><span class="phone-compact">Call</span><svg aria-hidden="true"><use href="#arrow-diagonal"/></svg></a>
     <button class="menu-toggle" type="button" aria-label="Open navigation menu" aria-controls="mobile-menu" aria-haspopup="dialog" aria-expanded="false"><span>MENU</span><span class="menu-lines" aria-hidden="true"></span></button>
     <div class="scroll-progress" aria-hidden="true"></div>
@@ -78,19 +79,42 @@
       </div>
     </section>
 
+    <section class="brand-signature" id="identity" aria-labelledby="signature-title">
+      <div class="wrap signature-layout">
+        <figure class="signature-art reveal"><img src="images/house-doctor-signature.webp" alt="Dr. Mac's original red and silver house-doctor emblem with hammer, stethoscope, ladder, and drill" width="1000" height="1000" loading="lazy"></figure>
+        <div class="signature-copy reveal"><p class="kicker">A DIFFERENT KIND OF HOUSE CALL.</p><h2 id="signature-title">We diagnose.<br>We build.<br><span>We improve.</span></h2><p>Some homes need a little attention. Others are ready for a new chapter. We bring the tools, the conversation, and a plan for the work ahead.</p><a class="text-link" href="#services">Find the right treatment <svg aria-hidden="true"><use href="#arrow-diagonal"/></svg></a></div>
+      </div>
+      <div class="signature-band"><span>REPAIR</span><svg aria-hidden="true"><use href="#heartbeat"/></svg><span>REMODEL</span><svg aria-hidden="true"><use href="#heartbeat"/></svg><span>RESTORE</span></div>
+    </section>
+
     <section class="work-section" id="work" aria-labelledby="work-title">
       <div class="wrap">
-        <div class="section-heading reveal"><div><p class="kicker">THE PROJECT ALBUM</p><h2 id="work-title">Real homes.<br>Hands-on care.</h2></div><p>Interiors, outdoor spaces, and the work in between.<br>Photographs from Dr. Mac's own projects.</p></div>
+        <div class="section-heading reveal"><div><p class="kicker">FROM THE DR. MAC PROJECT FILES</p><h2 id="work-title">Real work.<br>Open the files.</h2></div><div class="work-intro"><p>A look through our own project photographs, from the work in progress to the finishing details.</p><a class="text-link" href="#gallery">Browse the photo gallery <svg aria-hidden="true"><use href="#arrow"/></svg></a></div></div>
+        <div class="project-highlights">
         <figure class="project-feature reveal photo-reveal"><a class="photo-link" href="images/project-living-room.webp" data-photo="0" aria-label="Enlarge the living room project photograph" aria-haspopup="dialog" aria-controls="gallery-dialog"><img src="images/project-living-room.webp" srcset="images/project-living-room-small.webp 720w, images/project-living-room.webp 2200w" sizes="(max-width: 720px) 92vw, 88vw" alt="Living room with white built-in shelves, a fireplace, pale walls, and wood floors" width="2200" height="1650" loading="lazy"><span class="photo-corner" aria-hidden="true">↗</span></a><figcaption><span>Interiors</span><span>PAINT, TRIM & FINISHING DETAILS</span></figcaption></figure>
         <div class="project-pair">
           <figure class="project-outdoor reveal photo-reveal"><a class="photo-link" href="images/pergola.webp" data-photo="1" aria-label="Enlarge the timber pergola project photograph" aria-haspopup="dialog" aria-controls="gallery-dialog"><img src="images/pergola.webp" alt="Timber pergola over a patio beside a brick home" width="485" height="1024" loading="lazy"><span class="photo-corner" aria-hidden="true">↗</span></a><figcaption><span>Outdoors</span><span>PERGOLAS, DECKS & GATHERING SPACES</span></figcaption></figure>
-          <div class="project-detail-column"><div class="work-note reveal"><span class="detail-cross" aria-hidden="true"></span><p>Sometimes it's a whole room.<br>Sometimes it's the finishing touch.</p><a class="text-link" href="#services">Explore the services <svg aria-hidden="true"><use href="#arrow"/></svg></a></div><figure class="project-detail reveal photo-reveal"><a class="photo-link" href="images/project-hallway.webp" data-photo="2" aria-label="Enlarge the entry room project photograph" aria-haspopup="dialog" aria-controls="gallery-dialog"><img src="images/project-hallway.webp" srcset="images/project-hallway-small.webp 720w, images/project-hallway.webp 2200w" sizes="(max-width: 720px) 92vw, 46vw" alt="Entry room with an arched transom window, white trim, and dark wood flooring" width="2200" height="1650" loading="lazy"><span class="photo-corner" aria-hidden="true">↗</span></a><figcaption><span>The details</span><span>ROOMS WITH A NEW PERSPECTIVE</span></figcaption></figure></div>
+          <div class="project-detail-column"><figure class="project-detail reveal photo-reveal"><a class="photo-link" href="images/project-hallway.webp" data-photo="2" aria-label="Enlarge the entry room project photograph" aria-haspopup="dialog" aria-controls="gallery-dialog"><img src="images/project-hallway.webp" srcset="images/project-hallway-small.webp 720w, images/project-hallway.webp 2200w" sizes="(max-width: 720px) 92vw, 46vw" alt="Entry room with an arched transom window, white trim, and dark wood flooring" width="2200" height="1650" loading="lazy"><span class="photo-corner" aria-hidden="true">↗</span></a><figcaption><span>The details</span><span>ROOMS WITH A NEW PERSPECTIVE</span></figcaption></figure></div>
         </div>
-        <div class="album-link-row reveal"><p>There’s more to see.</p><button class="text-link gallery-launch js-only" id="open-album" type="button" aria-haspopup="dialog" aria-controls="gallery-dialog">Open the project album <span class="album-total">VIEW PHOTOGRAPHS</span><svg aria-hidden="true"><use href="#arrow-diagonal"/></svg></button><noscript><a class="text-link" href="images/deck.webp">View another deck project</a></noscript></div>
+        </div>
+        <div class="project-library" id="gallery" aria-labelledby="library-title">
+          <div class="library-heading"><span class="rx-mark" aria-hidden="true">℞</span><div><p class="kicker">THE WORK, IN PHOTOGRAPHS</p><h3 id="library-title">Find a project like yours.</h3></div></div>
+          <div class="gallery-filters js-only" role="group" aria-label="Filter project photographs">
+            <button type="button" data-filter="all" aria-pressed="true" aria-controls="project-grid">All work</button>
+            <button type="button" data-filter="interiors" aria-pressed="false" aria-controls="project-grid">Interiors &amp; finishes</button>
+            <button type="button" data-filter="outdoor" aria-pressed="false" aria-controls="project-grid">Decks &amp; outdoors</button>
+            <button type="button" data-filter="repairs" aria-pressed="false" aria-controls="project-grid">Repairs &amp; details</button>
+            <button type="button" data-filter="flooring" aria-pressed="false" aria-controls="project-grid">Floors &amp; carpet</button>
+          </div>
+          <div class="project-grid" id="project-grid"></div>
+          <div class="gallery-more-row js-only"><p id="gallery-status" role="status" aria-live="polite">Photographs from Dr. Mac's own projects.</p><button id="gallery-more" class="text-link" type="button" aria-controls="project-grid">Show more photographs <span aria-hidden="true">↓</span></button></div>
+          <noscript><p>Browse a selection above, or <a class="text-link" href="images/deck.webp">view another deck project</a>. Enable JavaScript for the full filterable gallery.</p></noscript>
+        </div>
+        <div class="album-link-row"><p>Every home has a story.</p><button class="text-link gallery-launch js-only" id="open-album" type="button" aria-haspopup="dialog" aria-controls="gallery-dialog">Open the project album <svg aria-hidden="true"><use href="#arrow-diagonal"/></svg></button></div>
       </div>
     </section>
 
-    <section class="services-section wrap" id="services" aria-labelledby="services-title">
+    <section class="services-section wrap treatment-ledger" id="services" aria-labelledby="services-title">
       <div class="section-heading reveal"><div><p class="kicker">AREAS OF CONCERN</p><h2 id="services-title">What's ailing<br>your home?</h2></div><p>From a small repair to a room ready for change.<br>Let's find the right treatment.</p></div>
       <div class="services-layout">
         <div class="services-visual reveal">
@@ -124,7 +148,7 @@
             <a href="mailto:dr.mac@att.net" class="contact-email">dr.mac@att.net <svg aria-hidden="true"><use href="#arrow-diagonal"/></svg></a>
             <div class="contact-location"><svg class="contact-pulse" aria-hidden="true"><use href="#heartbeat"/></svg><p>BASED IN CORDOVA, TENNESSEE<span>Tell us where the project is.<br>We'll confirm availability and scope.</span></p></div>
             <p class="contact-expectation">Have a photo? Add it to your email.<br>Pricing and scheduling are discussed for your project.<br>A request doesn't book an appointment automatically.</p>
-            <img class="contact-brand-art" src="images/house-doctor-logo.webp" alt="Dr. Mac Home Services. Repair, remodel, restore." width="1254" height="1254" loading="lazy">
+            <img class="contact-brand-art" src="images/house-doctor-signature.webp" alt="Dr. Mac Home Services. We diagnose, we build, we improve." width="1000" height="1000" loading="lazy">
           </div>
           <div class="project-form-wrap">
             <div class="form-masthead"><span>HOUSE CALL REQUEST<small>PATIENT: YOUR HOME</small></span><span class="rx-mark" aria-hidden="true">℞</span></div>
@@ -144,9 +168,9 @@
     </section>
   </main>
 
-  <footer class="site-footer wrap"><div class="footer-main"><a class="brand" href="#top" aria-label="Dr. Mac Home Services, back to top"><img class="brand-icon" src="images/house-doctor-emblem.webp" alt="Dr. Mac roof, hammer, and stethoscope emblem" width="879" height="690"><span class="brand-wordmark">DR. <b>MAC</b><span>HOME SERVICES</span></span></a><p>The doctor<br>your home deserves.</p><a class="back-top" href="#top">BACK TO TOP <span aria-hidden="true">↑</span></a></div><div class="footer-bottom"><p>© <span id="copyright-year">2026</span> Dr. Mac Home Services.</p><nav aria-label="Footer navigation"><a href="#services">Services</a><a href="#work">Projects</a><a href="https://www.facebook.com/DrMac-Carpet-Cleaning-147146995362555" target="_blank" rel="noopener noreferrer" aria-label="Dr. Mac on Facebook (opens in a new tab)">Facebook ↗</a></nav><button id="motion-toggle" class="motion-toggle" type="button" aria-pressed="false"><span aria-hidden="true">Ⅱ</span><span id="motion-label">Pause motion</span></button></div></footer>
+  <footer class="site-footer wrap"><div class="footer-main"><a class="brand" href="#top" aria-label="Dr. Mac Home Services, back to top"><img class="brand-icon" src="images/house-doctor-emblem.webp" alt="Dr. Mac roof, hammer, and stethoscope emblem" width="879" height="690"><span class="brand-wordmark"><img src="images/house-doctor-wordmark.webp" alt="Dr. Mac Home Services. Repair, remodel, restore." width="560" height="223"></span></a><p>The doctor<br>your home deserves.</p><a class="back-top" href="#top">BACK TO TOP <span aria-hidden="true">↑</span></a></div><div class="footer-bottom"><p>© <span id="copyright-year">2026</span> Dr. Mac Home Services.</p><nav aria-label="Footer navigation"><a href="#services">Services</a><a href="#work">Projects</a><a href="https://www.facebook.com/DrMac-Carpet-Cleaning-147146995362555" target="_blank" rel="noopener noreferrer" aria-label="Dr. Mac on Facebook (opens in a new tab)">Facebook ↗</a></nav><button id="motion-toggle" class="motion-toggle" type="button" aria-pressed="false"><span aria-hidden="true">Ⅱ</span><span id="motion-label">Pause motion</span></button></div></footer>
 
-  <dialog class="mobile-menu" id="mobile-menu" aria-labelledby="mobile-menu-title"><div class="dialog-heading"><p id="mobile-menu-title">DR. MAC HOME SERVICES</p><button class="dialog-close" data-close="mobile-menu" type="button" aria-label="Close navigation menu">×</button></div><nav aria-label="Mobile navigation"><a href="#film">The film <span aria-hidden="true">↗</span></a><a href="#work">Our work <span aria-hidden="true">↗</span></a><a href="#services">Services <span aria-hidden="true">↗</span></a><a href="#story">Our story <span aria-hidden="true">↗</span></a><a href="#contact">Contact <span aria-hidden="true">↗</span></a></nav><a class="menu-phone" href="tel:+19017542215">901.754.2215</a><p class="menu-location">CORDOVA, TENNESSEE</p></dialog>
+  <dialog class="mobile-menu" id="mobile-menu" aria-labelledby="mobile-menu-title"><div class="dialog-heading"><p id="mobile-menu-title">DR. MAC HOME SERVICES</p><button class="dialog-close" data-close="mobile-menu" type="button" aria-label="Close navigation menu">×</button></div><nav aria-label="Mobile navigation"><a href="#film">The film <span aria-hidden="true">↗</span></a><a href="#work">Project gallery <span aria-hidden="true">↗</span></a><a href="#services">Services <span aria-hidden="true">↗</span></a><a href="#story">Our story <span aria-hidden="true">↗</span></a><a href="#contact">Contact <span aria-hidden="true">↗</span></a></nav><a class="menu-phone" href="tel:+19017542215">901.754.2215</a><p class="menu-location">CORDOVA, TENNESSEE</p></dialog>
   <dialog class="gallery-dialog" id="gallery-dialog" aria-labelledby="gallery-title"><div class="dialog-heading"><p id="gallery-title">THE DR. MAC PROJECT ALBUM</p><button class="dialog-close" data-close="gallery-dialog" type="button" aria-label="Close project album">×</button></div><div class="gallery-view"><button id="gallery-prev" class="gallery-arrow" type="button" aria-label="Previous project photograph">←</button><img id="gallery-image" src="images/project-living-room-small.webp" alt="Living room with white built-in shelving and a fireplace" aria-describedby="gallery-caption"><button id="gallery-next" class="gallery-arrow" type="button" aria-label="Next project photograph">→</button></div><div class="gallery-caption"><p id="gallery-caption" aria-live="polite" aria-atomic="true">Interiors, down to the details.</p></div></dialog>
 </body>
 </html>

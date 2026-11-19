@@ -143,17 +143,6 @@ window.DrMacGallery = Object.freeze([
     "inProgress": false
   },
   {
-    "id": "deck2",
-    "src": "images/deck2.webp",
-    "thumbnail": "images/gallery/deck2-thumb.webp",
-    "width": 485,
-    "height": 1024,
-    "category": "outdoor",
-    "caption": "Another view from the deck.",
-    "alt": "Wooden backyard deck and railings",
-    "inProgress": false
-  },
-  {
     "id": "fence-detail",
     "src": "images/fence-detail.webp",
     "thumbnail": "images/gallery/fence-detail-thumb.webp",
